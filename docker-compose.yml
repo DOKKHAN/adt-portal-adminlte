@@ -21,8 +21,8 @@ services:
       "
 
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost/login.html"]
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1"]
       interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
