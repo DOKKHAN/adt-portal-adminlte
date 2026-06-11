@@ -27,9 +27,7 @@ body {
 
 .login-left {
   padding: 28px 42px 42px;
-  background:
-    linear-gradient(rgba(10, 24, 42, 0.14), rgba(10, 24, 42, 0.14)),
-    url("/assets/img/FONDO-ERP.jpg.jpeg") center center / cover no-repeat;
+  background: url("/assets/img/FONDO-ERP.jpg.jpeg") center center / cover no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,22 +48,12 @@ body {
   max-width: 320px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
   opacity: 1;
-  transition: opacity 450ms ease;
-  animation: sloganFadeIn 450ms ease;
+  transition: opacity 800ms ease-in-out;
+  will-change: opacity;
 }
 
 .login-slogan.is-changing {
   opacity: 0;
-}
-
-@keyframes sloganFadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 .login-right {

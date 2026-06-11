@@ -47,8 +47,11 @@ if (loginSlogan) {
     window.setTimeout(() => {
       sloganIndex = getRandomSloganIndex(sloganIndex);
       loginSlogan.textContent = `"${loginSlogans[sloganIndex]}"`;
-      loginSlogan.classList.remove("is-changing");
-    }, 450);
+
+      window.requestAnimationFrame(() => {
+        loginSlogan.classList.remove("is-changing");
+      });
+    }, 800);
   }, 5000);
 }
 
