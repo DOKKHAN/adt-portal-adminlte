@@ -16,6 +16,16 @@ const modules = {
     permission: "students.view",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   },
+  evaluations: {
+    title: "Evaluaciones",
+    permission: "evaluations.create",
+    url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
+  },
+  reports: {
+    title: "Reportes",
+    permission: "reports.view",
+    url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
+  },
   financial: {
     title: "Métricas financieras",
     permission: "financial_metrics.view",
@@ -24,6 +34,11 @@ const modules = {
   users: {
     title: "Usuarios",
     permission: "users.manage",
+    url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
+  },
+  settings: {
+    title: "Configuración",
+    permission: "settings.manage",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   }
 };
@@ -45,6 +60,16 @@ const sidebarItems = [
     permission: "students.view"
   },
   {
+    label: "Evaluaciones",
+    module: "evaluations",
+    permission: "evaluations.create"
+  },
+  {
+    label: "Reportes",
+    module: "reports",
+    permission: "reports.view"
+  },
+  {
     label: "Métricas financieras",
     module: "financial",
     permission: "financial_metrics.view"
@@ -53,28 +78,52 @@ const sidebarItems = [
     label: "Usuarios",
     module: "users",
     permission: "users.manage"
+  },
+  {
+    label: "Configuración",
+    module: "settings",
+    permission: "settings.manage"
   }
 ];
 
 let currentPermissions = [];
 
 async function initPortal() {
-  const { data } = await supabase.auth.getSession();
+  const { data, error: sessionError } = await supabase.auth.getSession();
 
-  if (!data.session) {
+  if (sessionError || !data.session) {
+    if (sessionError) {
+      console.error("Error validando sesión:", sessionError);
+    }
     window.location.href = "/login.html";
     return;
   }
 
-  document.getElementById("userInfo").textContent = data.session.user.email;
+  console.log("session.user.email:", data.session.user.email);
 
-  // Temporal para validar el portal.
-  // Después lo reemplazamos por Supabase RPC get_my_permissions().
-  currentPermissions = [
-    "dashboard.view",
-    "routines.create",
-    "students.view"
-  ];
+  const { data: permissionsData, error: permissionsError } = await supabase.rpc("get_my_permissions");
+
+  if (permissionsError) {
+    console.error("Error obteniendo permisos:", permissionsError);
+    window.location.href = "/login.html";
+    return;
+  }
+
+  console.log("permissionsData:", permissionsData);
+
+  if (!permissionsData || permissionsData.length === 0) {
+    await supabase.auth.signOut();
+    window.location.href = "/login.html";
+    return;
+  }
+
+  const profile = permissionsData[0];
+
+  document.getElementById("userInfo").textContent =
+    `${profile.full_name || profile.email} · ${profile.role}`;
+
+  currentPermissions = permissionsData.map((row) => row.permission_key);
+  console.log("currentPermissions:", currentPermissions);
 
   renderSidebar();
 }
@@ -86,6 +135,7 @@ function renderSidebar() {
   const allowedItems = sidebarItems.filter((item) =>
     currentPermissions.includes(item.permission)
   );
+  console.log("allowed sidebar items:", allowedItems);
 
   for (const item of allowedItems) {
     const li = document.createElement("li");
