@@ -68,13 +68,26 @@ async function initPortal() {
 
   document.getElementById("userInfo").textContent = data.session.user.email;
 
-  // Temporal para validar el portal.
-  // Después lo reemplazamos por Supabase RPC get_my_permissions().
-  currentPermissions = [
-    "dashboard.view",
-    "routines.create",
-    "students.view"
-  ];
+    const { data: permissionsData, error: permissionsError } = await supabase.rpc("get_my_permissions");
+
+    if (permissionsError) {
+    console.error("Error obteniendo permisos:", permissionsError);
+    window.location.href = "/login.html";
+    return;
+    }
+
+    if (!permissionsData || permissionsData.length === 0) {
+    await supabase.auth.signOut();
+    window.location.href = "/login.html";
+    return;
+    }
+
+    const profile = permissionsData[0];
+
+    document.getElementById("userInfo").textContent =
+    `${profile.full_name || profile.email} · ${profile.role}`;
+
+    currentPermissions = permissionsData.map((row) => row.permission_key);
 
   renderSidebar();
 }
