@@ -53,6 +53,11 @@ const sidebarItems = [
     label: "Usuarios",
     module: "users",
     permission: "users.manage"
+  },
+  {
+    label: "Configuración",
+    module: "settings",
+    permission: "settings.manage"
   }
 ];
 
