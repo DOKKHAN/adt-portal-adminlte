@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Portal ADT QA2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="/assets/js/config.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-rc4/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+  <div class="app-wrapper">
+
+    <nav class="app-header navbar navbar-expand bg-body">
+      <div class="container-fluid">
+        <span class="navbar-brand">Portal ADT QA2</span>
+        <button id="logoutButton" class="btn btn-sm btn-outline-danger ms-auto">
+          Cerrar sesión
+        </button>
+      </div>
+    </nav>
+
+    <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+      <div class="sidebar-brand">
+        <a href="#" class="brand-link">
+          <span class="brand-text fw-light">A Darlo Todo</span>
+        </a>
+      </div>
+
+      <div class="sidebar-wrapper">
+        <nav class="mt-2">
+          <ul id="sidebarMenu" class="nav sidebar-menu flex-column" role="menu"></ul>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <h3 id="moduleTitle" class="mb-0">Inicio</h3>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid">
+          <section id="homeView">
+            <div class="card">
+              <div class="card-body">
+                <h5>Bienvenido</h5>
+                <p id="userInfo">Cargando usuario...</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="frameView" style="display:none;">
+            <iframe id="mainFrame" class="app-frame" src=""></iframe>
+          </section>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-rc4/dist/js/adminlte.min.js"></script>
+  <script type="module" src="/assets/js/portal.js"></script>
+</body>
+</html>

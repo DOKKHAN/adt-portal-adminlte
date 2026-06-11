@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>QA2 A Darlo Todo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="/assets/js/config.js"></script>
+  <link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+
+<body class="login-page">
+  <main class="login-card">
+    <section class="login-left">
+      <h1>A DARLO TODO</h1>
+      <p>"Expertos en guiar, apasionados por servir."</p>
+    </section>
+
+    <section class="login-right">
+      <h2>Bienvenido a A Darlo Todo</h2>
+      <p>Accede al ERP operativo del gimnasio.</p>
+
+      <form id="loginForm">
+        <label>Email</label>
+        <input id="email" type="email" placeholder="correo@adarlotodo.cl" required>
+
+        <label>Contraseña</label>
+        <input id="password" type="password" placeholder="Ingresa tu contraseña" required>
+
+        <p id="loginError" class="error"></p>
+
+        <button type="submit">Iniciar sesión</button>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="/assets/js/auth.js"></script>
+</body>
+</html>
