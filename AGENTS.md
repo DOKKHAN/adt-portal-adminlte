@@ -339,19 +339,38 @@ Importante: ocultar opciones del sidebar no es seguridad suficiente. Es solo UX/
 
 No pasar roles por query params como fuente de verdad. Si se pasa email/user id al iframe, debe usarse solo como contexto UX, no como control de seguridad.
 
-## AdminLTE
+## AdminLTE local
 
-Actualmente el proyecto carga AdminLTE 4 desde CDN en `index.html`. Sin embargo, la implementación todavía es bastante básica. Hay que mejorar el layout para usar mejor componentes de AdminLTE:
+AdminLTE 4 esta instalado por npm junto a Bootstrap 5, Popper y Bootstrap Icons.
 
-- Sidebar con iconos
-- Navbar superior
-- Cards de inicio
-- Alertas AdminLTE/Bootstrap para errores
-- Mejor estructura responsive
-- Estado activo del menú
-- Opcional: Bootstrap Icons desde CDN
+Codex puede consultar:
 
-No es necesario migrar todo de una vez. Prioridad actual: permisos reales.
+```text
+node_modules/admin-lte
+public/vendor/adminlte
+public/vendor/bootstrap-icons
+```
+
+Los assets publicos se sirven desde:
+
+```text
+public/vendor/
+```
+
+Reglas:
+
+- No modificar archivos dentro de `public/vendor/` salvo actualizacion explicita de vendor.
+- Para actualizar vendor, instalar/actualizar dependencias npm y ejecutar `npm run vendor:copy`.
+- Mantener cache busting en HTML para CSS/JS con `?v=...`.
+- Mantener HTML/CSS/JS puro. No introducir React, Vue, Angular ni build step.
+- Usar componentes AdminLTE/Bootstrap para sidebar, navbar, cards, alerts, badges, buttons, tables, forms y modals.
+- Usar Bootstrap Icons desde `/vendor/bootstrap-icons/bootstrap-icons.css`.
+
+Guia local:
+
+```text
+docs/adminlte-component-guide.md
+```
 
 ## Problema observado actualmente
 
@@ -588,4 +607,3 @@ bypass cache en Cloudflare para qa2.adarlotodo.cl
 ```
 
 No modificar lógica de Supabase ni roles/permisos hasta descartar primero cache de frontend.
-
