@@ -6,34 +6,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script src="/assets/js/config.js"></script>
-  <link rel="stylesheet" href="/assets/css/custom.css">
+  <link rel="icon" type="image/png" href="/assets/img/ISO-BLANCO-GYM.png">
+  <link rel="apple-touch-icon" href="/assets/img/ISO-BLANCO-GYM.png">
+  <link rel="stylesheet" href="/assets/css/custom.css?v=20260611-login-ui-v1">
 </head>
 
 <body class="login-page">
   <main class="login-card">
     <section class="login-left">
       <h1>A DARLO TODO</h1>
-      <p>"Expertos en guiar, apasionados por servir."</p>
+      <img class="login-brand-logo" src="/assets/img/ISO-BLANCO-GYM.png" alt="A Darlo Todo">
+      <p id="loginSlogan" class="login-slogan">"Entrena, mide tu progreso y sigue avanzando"</p>
     </section>
 
     <section class="login-right">
       <h2>Bienvenido a A Darlo Todo</h2>
-      <p>Accede al ERP operativo del gimnasio.</p>
+      <p class="login-intro">Accede al ERP operativo del gimnasio para gestionar alumnos, evaluaciones y rutinas.</p>
 
       <form id="loginForm">
-        <label>Email</label>
-        <input id="email" type="email" placeholder="correo@adarlotodo.cl" required>
+        <div class="form-field">
+          <label for="email">Email <span>*</span></label>
+          <div class="input-shell">
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm0 2c-2.67 0-8 1.34-8 4v1.25c0 .41.34.75.75.75h14.5c.41 0 .75-.34.75-.75V18c0-2.66-5.33-4-8-4Z"/>
+              </svg>
+            </span>
+            <input id="email" type="email" placeholder="correo@adarlotodo.cl" autocomplete="email" required>
+          </div>
+        </div>
 
-        <label>Contraseña</label>
-        <input id="password" type="password" placeholder="Ingresa tu contraseña" required>
+        <div class="form-field">
+          <label for="password">Contraseña <span>*</span></label>
+          <div class="input-shell">
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M17 9h-1V7c0-2.21-1.79-4-4-4S8 4.79 8 7v2H7c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-7c0-1.1-.9-2-2-2Zm-7-2c0-1.1.9-2 2-2s2 .9 2 2v2h-4V7Z"/>
+              </svg>
+            </span>
+            <input id="password" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+            <button id="togglePassword" class="password-toggle" type="button" aria-label="Mostrar contraseña" aria-pressed="false">
+              <svg class="eye-open" viewBox="0 0 24 24" focusable="false">
+                <path d="M12 5c-5.02 0-8.74 4.38-9.79 5.78a2.02 2.02 0 0 0 0 2.44C3.26 14.62 6.98 19 12 19s8.74-4.38 9.79-5.78a2.02 2.02 0 0 0 0-2.44C20.74 9.38 17.02 5 12 5Zm0 11.5A4.5 4.5 0 1 1 12 7a4.5 4.5 0 0 1 0 9.5Zm0-2A2.5 2.5 0 1 0 12 9a2.5 2.5 0 0 0 0 5.5Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <a class="forgot-password" href="#" aria-label="Recuperar contraseña">¿Olvidaste tu contraseña?</a>
 
         <p id="loginError" class="error"></p>
 
-        <button type="submit">Iniciar sesión</button>
+        <button class="login-submit" type="submit">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M10 17v-3H3v-4h7V7l5 5-5 5Zm2-15h7c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2h-7v-2h7V4h-7V2Z"/>
+          </svg>
+          <span>Iniciar sesión</span>
+        </button>
       </form>
     </section>
   </main>
 
-  <script type="module" src="/assets/js/auth.js?v=20260611-roles-v2"></script>
+  <script type="module" src="/assets/js/auth.js?v=20260611-login-ui-v1"></script>
 </body>
 </html>

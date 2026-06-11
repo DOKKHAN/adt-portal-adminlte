@@ -9,6 +9,56 @@ export const supabase = createClient(
 
 const loginForm = document.getElementById("loginForm");
 const loginError = document.getElementById("loginError");
+const loginSlogan = document.getElementById("loginSlogan");
+const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+
+const loginSlogans = [
+  "Entrena, mide tu progreso y sigue avanzando",
+  "Tu compromiso hoy es su éxito mañana.",
+  "Presentes en cada paso, desde el primer día.",
+  "Acompañar no es una tarea, es nuestra promesa.",
+  "Expertos en guiar, apasionados por servir.",
+  "La excelencia se nota en los detalles que cuidas.",
+  "Somos el equipo que hace el entrenamiento más humano."
+];
+
+function getRandomSloganIndex(currentIndex = -1) {
+  if (loginSlogans.length <= 1) {
+    return 0;
+  }
+
+  let nextIndex = Math.floor(Math.random() * loginSlogans.length);
+
+  while (nextIndex === currentIndex) {
+    nextIndex = Math.floor(Math.random() * loginSlogans.length);
+  }
+
+  return nextIndex;
+}
+
+if (loginSlogan) {
+  let sloganIndex = getRandomSloganIndex();
+  loginSlogan.textContent = `"${loginSlogans[sloganIndex]}"`;
+
+  window.setInterval(() => {
+    sloganIndex = getRandomSloganIndex(sloganIndex);
+    loginSlogan.textContent = `"${loginSlogans[sloganIndex]}"`;
+  }, 5000);
+}
+
+if (togglePassword && passwordInput) {
+  togglePassword.addEventListener("click", () => {
+    const shouldShowPassword = passwordInput.type === "password";
+
+    passwordInput.type = shouldShowPassword ? "text" : "password";
+    togglePassword.setAttribute("aria-pressed", String(shouldShowPassword));
+    togglePassword.setAttribute(
+      "aria-label",
+      shouldShowPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+    );
+  });
+}
 
 loginForm?.addEventListener("submit", async (event) => {
   event.preventDefault();

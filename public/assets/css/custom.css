@@ -15,75 +15,172 @@ body {
 
 .login-card {
   width: min(920px, 92vw);
-  min-height: 560px;
+  min-height: 632px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-radius: 14px;
   overflow: hidden;
   background: #344b68;
   color: white;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
 }
 
 .login-left {
-  padding: 42px;
-  background: linear-gradient(rgba(20, 42, 66, 0.82), rgba(20, 42, 66, 0.82));
+  padding: 28px 42px 42px;
+  background:
+    linear-gradient(rgba(23, 45, 70, 0.76), rgba(23, 45, 70, 0.76)),
+    url("/assets/img/FONDO-ERP.jpg.jpeg") center / cover no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .login-left h1 {
-  font-size: 18px;
+  margin: 0;
+  font-size: 16px;
   font-weight: 800;
+  letter-spacing: 0;
 }
 
-.login-left p {
+.login-brand-logo {
+  align-self: center;
+  width: min(380px, 86%);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22));
+}
+
+.login-slogan {
+  margin: 0;
   font-size: 22px;
+  line-height: 1.14;
   font-weight: 800;
   max-width: 320px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
 }
 
 .login-right {
-  padding: 84px 58px;
+  padding: 88px 32px 68px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .login-right h2 {
+  margin: 0 0 8px;
   font-size: 26px;
   font-weight: 800;
   text-align: center;
+  letter-spacing: 0;
 }
 
-.login-right p {
+.login-intro {
+  margin: 0 auto;
   color: #68b9f5;
+  max-width: 360px;
   font-weight: 700;
   text-align: center;
+  line-height: 1.2;
 }
 
 .login-right form {
-  margin-top: 48px;
+  width: min(348px, 100%);
+  margin: 72px auto 0;
   display: grid;
-  gap: 14px;
+  gap: 30px;
 }
 
-.login-right label {
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field label {
   font-size: 14px;
   font-weight: 700;
 }
 
-.login-right input {
-  height: 34px;
-  border-radius: 6px;
-  border: 0;
-  padding: 0 12px;
+.form-field label span {
+  color: #ff2d2d;
 }
 
-.login-right button {
-  margin: 34px auto 0;
-  width: 220px;
-  height: 34px;
+.input-shell {
+  height: 32px;
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  background: #f8f8f9;
+  border-radius: 6px;
+  border: 1px solid rgba(9, 14, 30, 0.16);
+  overflow: hidden;
+}
+
+.input-icon,
+.password-toggle {
+  width: 34px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: #8a8a8a;
+}
+
+.input-icon svg,
+.password-toggle svg,
+.login-submit svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.login-right input {
+  width: 100%;
+  height: 30px;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #31445f;
+  font: inherit;
+  font-weight: 600;
+  outline: 0;
+}
+
+.login-right input::placeholder {
+  color: #9ba7b8;
+  opacity: 1;
+}
+
+.password-toggle {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.password-toggle:hover {
+  color: #5d6878;
+}
+
+.forgot-password {
+  width: fit-content;
+  color: #68b9f5;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  color: #8ccafe;
+}
+
+.login-submit {
+  margin: 24px auto 0;
+  width: 206px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   border: 0;
   border-radius: 5px;
   background: #070b1d;
@@ -92,10 +189,16 @@ body {
   cursor: pointer;
 }
 
+.login-submit:hover {
+  background: #101735;
+}
+
 .error {
   color: #ffb4b4 !important;
   min-height: 20px;
   text-align: left !important;
+  margin: -18px 0 0;
+  font-size: 13px;
 }
 
 .app-frame {
@@ -106,11 +209,76 @@ body {
 }
 
 @media (max-width: 768px) {
+  .login-page {
+    align-items: stretch;
+  }
+
   .login-card {
     grid-template-columns: 1fr;
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
   }
 
   .login-left {
-    min-height: 220px;
+    min-height: 300px;
+    padding: 28px;
+  }
+
+  .login-brand-logo {
+    width: min(320px, 82vw);
+  }
+
+  .login-slogan {
+    font-size: 20px;
+  }
+
+  .login-right {
+    padding: 48px 32px 72px;
+  }
+
+  .login-right form {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 520px) {
+  .login-card {
+    background: #344b68;
+  }
+
+  .login-left {
+    min-height: 238px;
+    padding: 24px 28px;
+  }
+
+  .login-left h1 {
+    font-size: 15px;
+  }
+
+  .login-brand-logo {
+    width: min(260px, 78vw);
+  }
+
+  .login-slogan {
+    font-size: 18px;
+    max-width: 300px;
+  }
+
+  .login-right {
+    padding: 44px 32px 70px;
+  }
+
+  .login-right h2 {
+    font-size: 25px;
+  }
+
+  .login-intro {
+    max-width: 340px;
+  }
+
+  .login-right form {
+    margin-top: 58px;
+    gap: 31px;
   }
 }
