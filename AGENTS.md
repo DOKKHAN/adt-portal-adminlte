@@ -439,3 +439,153 @@ Se considera terminado este bloque cuando:
 - Usuario `is_active=false` es enviado al login.
 - Coolify despliega desde `main` sin errores.
 - El contenedor queda healthy.
+
+
+## Política de caché y cache busting en QA
+
+Se detectó un problema específico en Brave: Firefox cargaba correctamente la versión nueva de `portal.js`, pero Brave seguía mostrando el sidebar antiguo incluso en incógnito. El diagnóstico final fue que el archivo nuevo existía en el servidor, pero el navegador/edge seguía usando una importación sin versionar desde `index.html`.
+
+Validación usada:
+
+```text
+https://qa2.adarlotodo.cl/assets/js/portal.js?v=test123
+```
+
+Si al abrir esa URL aparece la versión nueva con `get_my_permissions`, significa que el archivo correcto existe y el problema está en la carga/cache del HTML o de la importación del módulo JS.
+
+### Regla obligatoria para Codex
+
+Cada vez que se modifiquen archivos frontend importados por HTML, especialmente:
+
+```text
+public/assets/js/portal.js
+public/assets/js/auth.js
+public/assets/css/custom.css
+```
+
+Codex debe actualizar también el query param de versión en los archivos HTML correspondientes.
+
+Ejemplo en `public/index.html`:
+
+```html
+<script type="module" src="/assets/js/portal.js?v=20260611-roles-v2"></script>
+```
+
+Ejemplo en `public/login.html`:
+
+```html
+<script type="module" src="/assets/js/auth.js?v=20260611-roles-v2"></script>
+```
+
+Ejemplo para CSS si aplica:
+
+```html
+<link rel="stylesheet" href="/assets/css/custom.css?v=20260611-roles-v2">
+```
+
+No dejar imports críticos sin versión, por ejemplo evitar:
+
+```html
+<script type="module" src="/assets/js/portal.js"></script>
+```
+
+### Convención sugerida de versiones
+
+Usar una versión explícita y creciente por cambio funcional:
+
+```text
+v=20260611-roles-v2
+v=20260611-sidebar-icons-v1
+v=20260612-login-ui-v1
+v=20260612-permissions-fix-v1
+```
+
+No es necesario que sea semver formal en QA, pero debe cambiar cada vez que cambie el archivo importado.
+
+### Política de Nginx para QA
+
+Para `qa2.adarlotodo.cl`, mientras el portal esté en desarrollo, se recomienda evitar caché agresiva. En `nginx/default.conf` se puede usar:
+
+```nginx
+add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+add_header Pragma "no-cache" always;
+add_header Expires "0" always;
+```
+
+Esto es especialmente útil para HTML, JS y CSS durante iteraciones rápidas.
+
+### Cloudflare
+
+Para QA, se recomienda crear una Cache Rule en Cloudflare:
+
+```text
+Hostname equals qa2.adarlotodo.cl
+→ Bypass cache
+```
+
+Si hay dudas durante una validación, purgar manualmente:
+
+```text
+https://qa2.adarlotodo.cl/index.html
+https://qa2.adarlotodo.cl/login.html
+https://qa2.adarlotodo.cl/assets/js/portal.js
+https://qa2.adarlotodo.cl/assets/js/auth.js
+https://qa2.adarlotodo.cl/assets/css/custom.css
+```
+
+En QA también es aceptable usar `Purge Everything` si se sospecha caché intermedia.
+
+### Checklist post-deploy obligatorio
+
+Después de cada deploy en Coolify:
+
+1. Confirmar en los logs de Coolify que se desplegó el commit correcto:
+
+```text
+Importing DOKKHAN/adt-portal-adminlte:main (commit sha XXXXX)
+```
+
+Ese SHA debe coincidir con:
+
+```powershell
+git log --oneline -1
+```
+
+2. Validar el archivo servido con versión:
+
+```text
+https://qa2.adarlotodo.cl/assets/js/portal.js?v=VERSION_NUEVA
+```
+
+3. Si se cambió `index.html`, validar el source:
+
+```text
+view-source:https://qa2.adarlotodo.cl/index.html?v=VERSION_NUEVA
+```
+
+y confirmar que apunta al JS/CSS con la versión nueva.
+
+4. En navegador, recargar con:
+
+```text
+Ctrl + Shift + R
+```
+
+5. Si Brave muestra comportamiento distinto a Firefox, revisar primero caché/versionado antes de culpar a Supabase, Coolify o permisos.
+
+### Diagnóstico importante
+
+Si `portal.js?v=algo-nuevo` muestra el código actualizado, pero el portal sigue comportándose como antes, el problema suele estar en `index.html` cargando una URL sin versión o en caché intermedia.
+
+La solución preferida es:
+
+```text
+versionar scripts/CSS en HTML
++
+desactivar caché en Nginx para QA
++
+bypass cache en Cloudflare para qa2.adarlotodo.cl
+```
+
+No modificar lógica de Supabase ni roles/permisos hasta descartar primero cache de frontend.
+
