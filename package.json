@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "vendor:copy": "xcopy node_modules\\admin-lte\\dist public\\vendor\\adminlte /E /I /Y && xcopy node_modules\\bootstrap-icons\\font public\\vendor\\bootstrap-icons /E /I /Y",
+    "vendor:copy": "xcopy node_modules\\admin-lte\\dist public\\vendor\\adminlte /E /I /Y && xcopy node_modules\\bootstrap-icons\\font public\\vendor\\bootstrap-icons /E /I /Y && xcopy node_modules\\bootstrap\\dist public\\vendor\\bootstrap /E /I /Y",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -7,9 +7,9 @@
 
   <script src="/assets/js/config.js"></script>
 
-  <link rel="stylesheet" href="/vendor/adminlte/css/adminlte.min.css?v=20260611-adminlte-local">
-  <link rel="stylesheet" href="/vendor/bootstrap-icons/bootstrap-icons.css?v=20260611-adminlte-local">
-  <link rel="stylesheet" href="/assets/css/custom.css?v=20260611-adminlte-local">
+  <link rel="stylesheet" href="/vendor/adminlte/css/adminlte.min.css?v=20260611-adminlte-layout-v1">
+  <link rel="stylesheet" href="/vendor/bootstrap-icons/bootstrap-icons.css?v=20260611-adminlte-layout-v1">
+  <link rel="stylesheet" href="/assets/css/custom.css?v=20260611-adminlte-layout-v1">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -17,23 +17,128 @@
 
     <nav class="app-header navbar navbar-expand bg-body">
       <div class="container-fluid">
-        <span class="navbar-brand">Portal ADT QA2</span>
-        <button id="logoutButton" class="btn btn-sm btn-outline-danger ms-auto">
-          Cerrar sesión
-        </button>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button" aria-label="Contraer sidebar">
+              <i class="bi bi-list"></i>
+            </a>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <a href="#" class="nav-link">
+              <i class="bi bi-grid me-1" aria-hidden="true"></i>
+              Portal operativo
+            </a>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <a href="/vendor/adminlte/index.html" class="nav-link" target="_blank" rel="noopener">
+              <i class="bi bi-book me-1" aria-hidden="true"></i>
+              AdminLTE local
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" role="button" aria-label="Buscar">
+              <i class="bi bi-search"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-bs-toggle="dropdown" href="#" aria-label="Mensajes">
+              <i class="bi bi-chat-text"></i>
+              <span class="navbar-badge badge text-bg-danger">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+              <span class="dropdown-item dropdown-header">Mensajes operativos</span>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-person-check me-2"></i> Nuevos alumnos por revisar
+                <span class="float-end text-secondary fs-7">Hoy</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">Ver mensajes</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-bs-toggle="dropdown" href="#" aria-label="Notificaciones">
+              <i class="bi bi-bell-fill"></i>
+              <span class="navbar-badge badge text-bg-warning">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+              <span class="dropdown-item dropdown-header">Notificaciones</span>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-clipboard-pulse me-2"></i> Evaluaciones pendientes
+                <span class="float-end text-secondary fs-7">3</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-calendar-check me-2"></i> Rutinas actualizadas
+                <span class="float-end text-secondary fs-7">12</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">Ver todo</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-lte-toggle="fullscreen" aria-label="Pantalla completa">
+              <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+              <i data-lte-icon="minimize" class="bi bi-fullscreen-exit d-none"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="themeMenu" data-bs-toggle="dropdown" aria-label="Tema">
+              <i class="bi bi-sun-fill"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="themeMenu">
+              <li>
+                <button class="dropdown-item" type="button" data-theme-value="light">
+                  <i class="bi bi-sun-fill me-2"></i> Claro
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button" data-theme-value="dark">
+                  <i class="bi bi-moon-fill me-2"></i> Oscuro
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+              <span id="userAvatar" class="user-image rounded-circle shadow portal-user-avatar">ADT</span>
+              <span id="userTopbarName" class="d-none d-md-inline">Cargando...</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+              <li class="user-header text-bg-primary">
+                <span id="userMenuAvatar" class="portal-user-avatar portal-user-avatar-lg">ADT</span>
+                <p>
+                  <span id="userMenuName">Cargando usuario...</span>
+                  <small id="userMenuRole">Validando permisos</small>
+                </p>
+              </li>
+              <li class="user-footer">
+                <button id="logoutButton" class="btn btn-outline-danger float-end" type="button">
+                  <i class="bi bi-box-arrow-right me-1"></i>
+                  Cerrar sesión
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </nav>
 
-    <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <aside class="app-sidebar bg-body-secondary shadow portal-sidebar" data-bs-theme="dark">
       <div class="sidebar-brand">
         <a href="#" class="brand-link">
-          <span class="brand-text fw-light">A Darlo Todo</span>
+          <img src="/assets/img/ISO-BLANCO-GYM.png" alt="A Darlo Todo" class="brand-image opacity-75 shadow">
+          <span class="brand-text fw-semibold">A Darlo Todo</span>
         </a>
       </div>
 
       <div class="sidebar-wrapper">
         <nav class="mt-2">
-          <ul id="sidebarMenu" class="nav sidebar-menu flex-column" role="menu"></ul>
+          <ul id="sidebarMenu" class="nav sidebar-menu flex-column" data-lte-toggle="treeview" data-accordion="false" role="menu"></ul>
         </nav>
       </div>
     </aside>
@@ -50,7 +155,7 @@
           <section id="homeView">
             <div class="card">
               <div class="card-body">
-                <h5>Bienvenido</h5>
+                <h5 class="card-title mb-2">Bienvenido</h5>
                 <p id="userInfo">Cargando usuario...</p>
               </div>
             </div>
@@ -65,7 +170,8 @@
 
   </div>
 
-  <script src="/vendor/adminlte/js/adminlte.min.js?v=20260611-adminlte-local"></script>
-  <script type="module" src="/assets/js/portal.js?v=20260611-adminlte-local"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js?v=20260611-adminlte-layout-v1"></script>
+  <script src="/vendor/adminlte/js/adminlte.min.js?v=20260611-adminlte-layout-v1"></script>
+  <script type="module" src="/assets/js/portal.js?v=20260611-adminlte-layout-v1"></script>
 </body>
 </html>

@@ -348,6 +348,7 @@ Codex puede consultar:
 ```text
 node_modules/admin-lte
 public/vendor/adminlte
+public/vendor/bootstrap
 public/vendor/bootstrap-icons
 ```
 
@@ -364,6 +365,7 @@ Reglas:
 - Mantener cache busting en HTML para CSS/JS con `?v=...`.
 - Mantener HTML/CSS/JS puro. No introducir React, Vue, Angular ni build step.
 - Usar componentes AdminLTE/Bootstrap para sidebar, navbar, cards, alerts, badges, buttons, tables, forms y modals.
+- Usar Bootstrap JS local desde `/vendor/bootstrap/js/bootstrap.bundle.min.js` para dropdowns, modals y otros componentes interactivos.
 - Usar Bootstrap Icons desde `/vendor/bootstrap-icons/bootstrap-icons.css`.
 
 Guia local:
