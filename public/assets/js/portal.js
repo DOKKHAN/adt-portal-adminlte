@@ -128,6 +128,7 @@ const sidebarItems = [
 
 let currentPermissions = [];
 let activeModule = "home";
+const THEME_STORAGE_KEY = "adt-portal-theme";
 
 async function initPortal() {
   const { data, error: sessionError } = await supabase.auth.getSession();
@@ -383,10 +384,29 @@ document.getElementById("logoutButton")?.addEventListener("click", async () => {
   window.location.href = "/login.html";
 });
 
+function applyTheme(theme) {
+  const resolvedTheme = theme === "light" ? "light" : "dark";
+  const themeIcon = document.getElementById("themeMenuIcon");
+
+  document.documentElement.setAttribute("data-bs-theme", resolvedTheme);
+
+  if (themeIcon) {
+    themeIcon.className = `bi ${resolvedTheme === "dark" ? "bi-moon-fill" : "bi-sun-fill"}`;
+  }
+
+  document.querySelectorAll("[data-theme-value]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.themeValue === resolvedTheme);
+  });
+}
+
 document.querySelectorAll("[data-theme-value]").forEach((button) => {
   button.addEventListener("click", () => {
-    document.documentElement.setAttribute("data-bs-theme", button.dataset.themeValue);
+    const theme = button.dataset.themeValue;
+
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    applyTheme(theme);
   });
 });
 
+applyTheme(localStorage.getItem(THEME_STORAGE_KEY) || "dark");
 initPortal();
