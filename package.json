@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "vendor:copy": "xcopy node_modules\\admin-lte\\dist public\\vendor\\adminlte /E /I /Y && xcopy node_modules\\bootstrap-icons\\font public\\vendor\\bootstrap-icons /E /I /Y && xcopy node_modules\\bootstrap\\dist public\\vendor\\bootstrap /E /I /Y",
+    "vendor:copy": "xcopy node_modules\\admin-lte\\dist public\\vendor\\adminlte /E /I /Y && xcopy node_modules\\bootstrap-icons\\font public\\vendor\\bootstrap-icons /E /I /Y && xcopy node_modules\\bootstrap\\dist public\\vendor\\bootstrap /E /I /Y && xcopy node_modules\\@fontsource\\ubuntu public\\vendor\\fonts\\ubuntu /E /I /Y",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/DOKKHAN/adt-portal-adminlte#readme",
   "dependencies": {
+    "@fontsource/ubuntu": "^5.2.8",
     "@popperjs/core": "^2.11.8",
     "admin-lte": "^4.0.2",
     "bootstrap": "^5.3.8",

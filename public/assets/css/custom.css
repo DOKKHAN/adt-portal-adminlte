@@ -1,6 +1,12 @@
+@import url("/vendor/fonts/ubuntu/300.css");
+@import url("/vendor/fonts/ubuntu/400.css");
+@import url("/vendor/fonts/ubuntu/500.css");
+@import url("/vendor/fonts/ubuntu/700.css");
+
 html,
 body {
   height: 100%;
+  font-family: "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 :root {
@@ -13,6 +19,7 @@ body {
   --adt-text: #f8fbff;
   --adt-muted: #c4cfdd;
   --adt-border: rgba(50, 70, 99, 0.9);
+  --adt-font-family: "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 [data-bs-theme="dark"] {
@@ -128,7 +135,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--adt-font-family);
 }
 
 .login-card {
@@ -352,6 +359,10 @@ body {
   height: calc(100vh - 150px);
   border: 0;
   background: #fff;
+}
+
+bit-notification-bar-root {
+  pointer-events: none !important;
 }
 
 @media (max-width: 768px) {

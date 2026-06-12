@@ -367,6 +367,7 @@ Reglas:
 - Usar componentes AdminLTE/Bootstrap para sidebar, navbar, cards, alerts, badges, buttons, tables, forms y modals.
 - Usar Bootstrap JS local desde `/vendor/bootstrap/js/bootstrap.bundle.min.js` para dropdowns, modals y otros componentes interactivos.
 - Usar Bootstrap Icons desde `/vendor/bootstrap-icons/bootstrap-icons.css`.
+- Usar Ubuntu local desde `/vendor/fonts/ubuntu/` como fuente base del portal y login.
 
 Guia local:
 

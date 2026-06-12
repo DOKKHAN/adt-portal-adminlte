@@ -9,6 +9,7 @@ No introducir React, Vue, Angular ni un build step. Los archivos publicados se s
 - Usar componentes AdminLTE/Bootstrap para sidebar, cards, alerts, badges, buttons, tables, forms y modals.
 - Usar Bootstrap Icons desde `/vendor/bootstrap-icons/`.
 - Usar Bootstrap JS desde `/vendor/bootstrap/js/bootstrap.bundle.min.js` cuando haya dropdowns, modals u otros componentes interactivos de Bootstrap.
+- Usar Ubuntu desde `/vendor/fonts/ubuntu/` como fuente base del portal y login.
 - No modificar archivos dentro de `public/vendor/` salvo que se este actualizando explicitamente la version de vendor.
 - Mantener cambios propios en `public/assets/css/custom.css`, `public/assets/js/auth.js` y `public/assets/js/portal.js`.
 - Siempre versionar JS/CSS importados desde HTML con `?v=...`.
