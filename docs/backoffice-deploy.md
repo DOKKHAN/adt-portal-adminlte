@@ -59,6 +59,7 @@ Ejecutar desde la terminal del contenedor en Coolify:
 ```bash
 python manage.py sync_sidebar_permissions
 python manage.py list_profiles
+python manage.py check_owner_login cristi.diego@gmail.com
 ```
 
 Los usuarios `owner` activos pueden iniciar sesion en el backoffice con sus credenciales de Supabase Auth. Django valida el password contra Supabase y luego exige que exista un perfil activo en `public.app_profiles` con `role = 'owner'`.
