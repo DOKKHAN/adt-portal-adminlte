@@ -58,7 +58,8 @@ DJANGO_DEBUG=True
 DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
 SUPABASE_URL=https://supabase.adarlotodo.cl
 SUPABASE_ANON_KEY=anon-key-publica
-DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/postgres?sslmode=require
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/postgres
+DATABASE_SSL_REQUIRE=False
 ```
 
 ## Seguridad
@@ -100,7 +101,8 @@ DJANGO_SECRET_KEY=valor-largo-y-privado
 DJANGO_DEBUG=False
 DJANGO_ALLOWED_HOSTS=backoffice.adarlotodo.cl
 DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.adarlotodo.cl
-DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
+DATABASE_URL=postgresql://USER:PASSWORD@supabase-db:5432/postgres
+DATABASE_SSL_REQUIRE=False
 SUPABASE_URL=https://supabase.adarlotodo.cl
 SUPABASE_ANON_KEY=anon-key-publica
 ALLOW_SQLITE_FALLBACK=False

@@ -79,6 +79,12 @@ TEMPLATES = [
 WSGI_APPLICATION = "backoffice.wsgi.application"
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_SSL_REQUIRE = os.getenv("DATABASE_SSL_REQUIRE", "False").lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
 ALLOW_SQLITE_FALLBACK = os.getenv("ALLOW_SQLITE_FALLBACK", "False").lower() in {
     "1",
     "true",
@@ -91,7 +97,7 @@ if DATABASE_URL:
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
-            ssl_require="sslmode=require" not in DATABASE_URL,
+            ssl_require=DATABASE_SSL_REQUIRE,
         )
     }
 elif DEBUG or ALLOW_SQLITE_FALLBACK:
