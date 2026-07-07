@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 
@@ -70,6 +71,12 @@ TEMPLATES = [
 WSGI_APPLICATION = "backoffice.wsgi.application"
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+ALLOW_SQLITE_FALLBACK = os.getenv("ALLOW_SQLITE_FALLBACK", "False").lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
 
 if DATABASE_URL:
     DATABASES = {
@@ -79,13 +86,18 @@ if DATABASE_URL:
             ssl_require="sslmode=require" not in DATABASE_URL,
         )
     }
-else:
+elif DEBUG or ALLOW_SQLITE_FALLBACK:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+else:
+    raise ImproperlyConfigured(
+        "DATABASE_URL is required for the deployed backoffice. "
+        "Set it to the Supabase/Postgres connection string in Coolify."
+    )
 
 AUTH_PASSWORD_VALIDATORS = [
     {

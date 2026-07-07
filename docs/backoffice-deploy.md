@@ -44,6 +44,7 @@ DJANGO_DEBUG=False
 DJANGO_ALLOWED_HOSTS=backoffice.adarlotodo.cl
 DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.adarlotodo.cl
 DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
+ALLOW_SQLITE_FALLBACK=False
 ```
 
 ## Comandos post-deploy
@@ -61,3 +62,5 @@ python manage.py list_profiles
 Si el backoffice corre dentro de Coolify y Supabase tambien esta en la misma infraestructura, usa el host interno o el nombre del servicio Postgres de Supabase, no el dominio web `https://supabase.adarlotodo.cl`.
 
 El dominio `supabase.adarlotodo.cl` sirve API/Studio por HTTP(S), no es una conexion PostgreSQL directa para Django.
+
+Si ves un error como `no such table: auth.users` y el traceback menciona `django/db/backends/sqlite3`, significa que el backoffice no esta usando Supabase. En Coolify falta `DATABASE_URL` o esta vacio.
