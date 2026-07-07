@@ -88,8 +88,8 @@ backoffice backoffice.adarlotodo.cl  -> Django privado
 En Coolify, crear una aplicacion separada apuntando a este mismo repositorio/rama y usando:
 
 ```text
-Build Pack: Dockerfile
-Base Directory: /backoffice
+Build Pack: Docker Compose
+Docker Compose File: docker-compose.backoffice.yml
 Port: 8000
 Domain: https://backoffice.adarlotodo.cl
 ```

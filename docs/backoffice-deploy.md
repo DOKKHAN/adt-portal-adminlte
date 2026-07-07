@@ -25,13 +25,15 @@ SSL/TLS: Full o Full strict, segun certificado del origen
 
 ## Coolify
 
-Crear una aplicacion separada desde GitHub:
+Crear una aplicacion separada desde GitHub. Para que el backoffice quede conectado
+siempre a la red interna de Supabase, usar Docker Compose con el archivo
+`docker-compose.backoffice.yml`.
 
 ```text
 Repository: DOKKHAN/adt-portal-adminlte
 Branch: codex/django-backoffice-prototype
-Build Pack: Dockerfile
-Base Directory: /backoffice
+Build Pack: Docker Compose
+Docker Compose File: docker-compose.backoffice.yml
 Port: 8000
 Domain: https://backoffice.adarlotodo.cl
 ```
@@ -72,3 +74,14 @@ El dominio `supabase.adarlotodo.cl` sirve API/Studio por HTTP(S), no es una cone
 Si ves un error como `no such table: auth.users` y el traceback menciona `django/db/backends/sqlite3`, significa que el backoffice no esta usando Supabase. En Coolify falta `DATABASE_URL` o esta vacio.
 
 Si ves `server does not support SSL, but SSL was required`, estas conectando por la red interna Docker a Postgres. Usa `DATABASE_SSL_REQUIRE=False` y quita `?sslmode=require` del `DATABASE_URL`.
+
+Si ves `failed to resolve host 'supabase-db...'`, el contenedor no esta conectado
+a la red Docker de Supabase. Este repo espera la red externa:
+
+```text
+yeevzr44tt5s3psxfezsn46m
+```
+
+Por eso el backoffice debe desplegarse con `docker-compose.backoffice.yml` o,
+si se usa Dockerfile puro en Coolify, se debe conectar manualmente ese recurso
+a la misma red desde la configuracion de Coolify.

@@ -19,3 +19,11 @@ services:
       SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
       DATABASE_SSL_REQUIRE: ${DATABASE_SSL_REQUIRE:-False}
       DATABASE_URL: ${DATABASE_URL:-}
+
+    networks:
+      - supabase_internal
+
+networks:
+  supabase_internal:
+    external: true
+    name: yeevzr44tt5s3psxfezsn46m
