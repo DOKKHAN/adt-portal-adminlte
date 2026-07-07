@@ -13,14 +13,21 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-dev-secret-key")
 
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in {"1", "true", "yes", "on"}
 
-ALLOWED_HOSTS = [
+DEFAULT_ALLOWED_HOSTS = {
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+    "backoffice.adarlotodo.cl",
+    "backoffice.qa2.adarlotodo.cl",
+}
+
+ENV_ALLOWED_HOSTS = {
     host.strip()
-    for host in os.getenv(
-        "DJANGO_ALLOWED_HOSTS",
-        "localhost,127.0.0.1,backoffice.adarlotodo.cl",
-    ).split(",")
+    for host in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
     if host.strip()
-]
+}
+
+ALLOWED_HOSTS = sorted(DEFAULT_ALLOWED_HOSTS | ENV_ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -113,11 +120,16 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = [
+DEFAULT_CSRF_TRUSTED_ORIGINS = {
+    "http://localhost:8090",
+    "https://backoffice.adarlotodo.cl",
+    "https://backoffice.qa2.adarlotodo.cl",
+}
+
+ENV_CSRF_TRUSTED_ORIGINS = {
     origin.strip()
-    for origin in os.getenv(
-        "DJANGO_CSRF_TRUSTED_ORIGINS",
-        "https://backoffice.adarlotodo.cl",
-    ).split(",")
+    for origin in os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
     if origin.strip()
-]
+}
+
+CSRF_TRUSTED_ORIGINS = sorted(DEFAULT_CSRF_TRUSTED_ORIGINS | ENV_CSRF_TRUSTED_ORIGINS)
