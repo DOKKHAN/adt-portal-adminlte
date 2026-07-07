@@ -1,0 +1,16 @@
+services:
+  adt-backoffice:
+    build:
+      context: ./backoffice
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    ports:
+      - "8090:8000"
+
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-unsafe-local-dev-key}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0}
+      DATABASE_URL: ${DATABASE_URL:-}

@@ -41,15 +41,19 @@ class AppPermission(models.Model):
 class AppRolePermission(models.Model):
     id = models.BigAutoField(primary_key=True)
     role = models.CharField(max_length=80)
-    permission_key = models.CharField(max_length=120)
+    permission = models.ForeignKey(
+        AppPermission,
+        db_column="permission_key",
+        to_field="key",
+        on_delete=models.DO_NOTHING,
+    )
 
     class Meta:
         managed = False
         db_table = "app_role_permissions"
         verbose_name = "permiso por rol"
         verbose_name_plural = "permisos por rol"
-        ordering = ["role", "permission_key"]
+        ordering = ["role", "permission"]
 
     def __str__(self):
-        return f"{self.role} -> {self.permission_key}"
-
+        return f"{self.role} -> {self.permission_id}"

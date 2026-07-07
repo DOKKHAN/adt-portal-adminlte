@@ -23,8 +23,8 @@ class AppPermissionAdmin(admin.ModelAdmin):
 
 @admin.register(AppRolePermission)
 class AppRolePermissionAdmin(admin.ModelAdmin):
-    list_display = ("role", "permission_key")
+    list_display = ("role", "permission")
     list_filter = ("role",)
-    search_fields = ("role", "permission_key")
-    ordering = ("role", "permission_key")
-
+    autocomplete_fields = ("permission",)
+    search_fields = ("role", "permission__key", "permission__label", "permission__module")
+    ordering = ("role", "permission")

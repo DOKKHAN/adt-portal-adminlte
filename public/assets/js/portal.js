@@ -8,7 +8,7 @@ const modules = {
   },
   routines: {
     title: "Rutinas",
-    permission: "routines.create",
+    permission: "routines.view",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   },
   students: {
@@ -18,7 +18,7 @@ const modules = {
   },
   evaluations: {
     title: "Evaluaciones",
-    permission: "evaluations.create",
+    permission: "evaluations.view",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   },
   reports: {
@@ -33,17 +33,7 @@ const modules = {
   },
   inventory: {
     title: "Inventario",
-    permission: "reports.view",
-    url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
-  },
-  users: {
-    title: "Usuarios",
-    permission: "users.manage",
-    url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
-  },
-  settings: {
-    title: "Configuración",
-    permission: "settings.manage",
+    permission: "inventory.view",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   }
 };
@@ -59,6 +49,7 @@ const sidebarItems = [
   {
     type: "section",
     label: "Entrenamiento",
+    permission: "training.view",
     items: [
       {
         label: "Alumnos",
@@ -69,13 +60,13 @@ const sidebarItems = [
       {
         label: "Evaluaciones",
         module: "evaluations",
-        permission: "evaluations.create",
+        permission: "evaluations.view",
         icon: "bi-activity"
       },
       {
         label: "Rutinas",
         module: "routines",
-        permission: "routines.create",
+        permission: "routines.view",
         icon: "bi-clipboard-check"
       }
     ]
@@ -83,6 +74,7 @@ const sidebarItems = [
   {
     type: "section",
     label: "Métricas",
+    permission: "metrics.view",
     items: [
       {
         type: "tree",
@@ -99,28 +91,10 @@ const sidebarItems = [
           {
             label: "Inventario",
             module: "inventory",
-            permission: "reports.view",
+            permission: "inventory.view",
             icon: "bi-box-seam"
           }
         ]
-      }
-    ]
-  },
-  {
-    type: "section",
-    label: "Administración",
-    items: [
-      {
-        label: "Configuración",
-        module: "settings",
-        permission: "settings.manage",
-        icon: "bi-gear"
-      },
-      {
-        label: "Usuarios",
-        module: "users",
-        permission: "users.manage",
-        icon: "bi-person-gear"
       }
     ]
   }
@@ -197,8 +171,9 @@ function getAllowedSidebarItems(items) {
     .map((item) => {
       if (item.type === "section") {
         const allowedSectionItems = getAllowedSidebarItems(item.items);
+        const canSeeSection = !item.permission || hasPermission(item.permission);
 
-        if (allowedSectionItems.length === 0) {
+        if (!canSeeSection || allowedSectionItems.length === 0) {
           return null;
         }
 
