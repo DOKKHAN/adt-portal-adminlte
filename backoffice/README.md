@@ -67,9 +67,41 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/postgres?sslmode=require
 
 ## Deploy sugerido
 
-Desplegar como servicio separado, por ejemplo:
+URL QA definida:
 
 ```text
-portal qa2.adarlotodo.cl       -> Nginx estatico actual
-backoffice admin.qa2.adarlotodo.cl -> Django privado
+https://backoffice.qa2.adarlotodo.cl
+```
+
+Desplegar como servicio separado:
+
+```text
+portal qa2.adarlotodo.cl              -> Nginx estatico actual
+backoffice backoffice.qa2.adarlotodo.cl -> Django privado
+```
+
+En Coolify, crear una aplicacion separada apuntando a este mismo repositorio/rama y usando:
+
+```text
+Build Pack: Dockerfile
+Base Directory: /backoffice
+Port: 8000
+Domain: https://backoffice.qa2.adarlotodo.cl
+```
+
+Variables recomendadas en Coolify:
+
+```env
+DJANGO_SECRET_KEY=valor-largo-y-privado
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=backoffice.qa2.adarlotodo.cl
+DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.qa2.adarlotodo.cl
+DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
+```
+
+Despues del primer deploy:
+
+```bash
+python manage.py createsuperuser
+python manage.py sync_sidebar_permissions
 ```
