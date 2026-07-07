@@ -1,6 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group, User
 
-from .models import AppPermission, AppProfile, AppRolePermission
+from .models import AppPermission, AppProfile, AppRolePermission, SupabaseAuthUser
+
+
+admin.site.unregister(User)
+admin.site.unregister(Group)
 
 
 @admin.register(AppProfile)
@@ -11,6 +16,35 @@ class AppProfileAdmin(admin.ModelAdmin):
     ordering = ("email",)
     fields = ("id", "email", "full_name", "role", "is_active")
     readonly_fields = ("id",)
+
+
+@admin.register(SupabaseAuthUser)
+class SupabaseAuthUserAdmin(admin.ModelAdmin):
+    list_display = ("email", "phone", "created_at", "last_sign_in_at", "has_profile")
+    search_fields = ("email", "phone", "id")
+    ordering = ("email", "created_at")
+    readonly_fields = (
+        "id",
+        "email",
+        "phone",
+        "created_at",
+        "last_sign_in_at",
+        "raw_user_meta_data",
+    )
+    fields = readonly_fields
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    @admin.display(boolean=True, description="Tiene perfil")
+    def has_profile(self, obj):
+        return AppProfile.objects.filter(id=obj.id).exists()
 
 
 @admin.register(AppPermission)

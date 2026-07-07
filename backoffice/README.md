@@ -7,6 +7,7 @@ Este proyecto no reemplaza el portal estatico ni Supabase Auth. Su objetivo es d
 ## Responsabilidad
 
 - Administrar perfiles de usuarios en `public.app_profiles`.
+- Consultar usuarios creados en Supabase Auth desde `auth.users`.
 - Administrar permisos disponibles en `public.app_permissions`.
 - Administrar la relacion rol-permiso en `public.app_role_permissions`.
 - Mantener la autenticacion operativa del portal en Supabase Auth.
@@ -64,6 +65,7 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/postgres?sslmode=require
 - No versionar `.env`.
 - La credencial Postgres o service role debe existir solo en el servidor Django.
 - El portal debe seguir validando permisos con Supabase/RLS/RPC.
+- La lista "Usuarios Supabase Auth" es de solo lectura. Los roles del portal se asignan en "Perfiles de usuario".
 
 ## Deploy sugerido
 
