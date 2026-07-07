@@ -115,3 +115,7 @@ python manage.py sync_sidebar_permissions
 ```
 
 Los perfiles con `role = owner` e `is_active = true` pueden iniciar sesion con sus credenciales de Supabase Auth. El superusuario local de Django queda solo como respaldo operativo.
+
+Si `Permisos por rol` no puede editarse desde Django Admin, revisa que
+`public.app_role_permissions` tenga una columna `id` como clave primaria. El SQL
+de referencia esta en `docs/backoffice-deploy.md`.

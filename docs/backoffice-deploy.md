@@ -63,7 +63,34 @@ python manage.py list_profiles
 
 Los usuarios `owner` activos pueden iniciar sesion en el backoffice con sus credenciales de Supabase Auth. Django valida el password contra Supabase y luego exige que exista un perfil activo en `public.app_profiles` con `role = 'owner'`.
 
-El contenedor ejecuta automaticamente `python manage.py ensure_backoffice_schema` al iniciar para que Django Admin pueda editar `Permisos por rol`.
+Para editar `Permisos por rol` desde Django Admin, la tabla `public.app_role_permissions`
+debe tener una columna `id` como clave primaria. Si no existe, ejecutar desde Supabase
+SQL Editor con un usuario dueno de la tabla:
+
+```sql
+alter table public.app_role_permissions
+add column if not exists id bigserial;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conrelid = 'public.app_role_permissions'::regclass
+      and contype = 'p'
+  ) then
+    alter table public.app_role_permissions
+    add constraint app_role_permissions_pkey primary key (id);
+  end if;
+end $$;
+
+create unique index if not exists app_role_permissions_role_permission_key
+on public.app_role_permissions(role, permission_key);
+```
+
+No se ejecuta automaticamente al iniciar porque algunas instalaciones de Supabase
+crean las tablas con otro owner y rechazan `ALTER TABLE` desde el usuario de conexion
+del backoffice.
 
 ## Nota sobre DATABASE_URL
 
