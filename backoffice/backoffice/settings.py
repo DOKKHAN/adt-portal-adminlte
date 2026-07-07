@@ -14,6 +14,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-dev-secret-key")
 
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in {"1", "true", "yes", "on"}
 
+SUPABASE_URL = os.getenv("SUPABASE_URL", "").rstrip("/")
+SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY", "")
+
 DEFAULT_ALLOWED_HOSTS = {
     "localhost",
     "127.0.0.1",
@@ -38,6 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "permissions_admin",
+]
+
+AUTHENTICATION_BACKENDS = [
+    "backoffice.auth_backends.SupabaseOwnerAuthBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 MIDDLEWARE = [

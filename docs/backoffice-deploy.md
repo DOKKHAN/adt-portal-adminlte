@@ -44,6 +44,8 @@ DJANGO_DEBUG=False
 DJANGO_ALLOWED_HOSTS=backoffice.adarlotodo.cl
 DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.adarlotodo.cl
 DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
+SUPABASE_URL=https://supabase.adarlotodo.cl
+SUPABASE_ANON_KEY=anon-key-publica
 ALLOW_SQLITE_FALLBACK=False
 ```
 
@@ -52,10 +54,13 @@ ALLOW_SQLITE_FALLBACK=False
 Ejecutar desde la terminal del contenedor en Coolify:
 
 ```bash
-python manage.py createsuperuser
 python manage.py sync_sidebar_permissions
 python manage.py list_profiles
 ```
+
+Los usuarios `owner` activos pueden iniciar sesion en el backoffice con sus credenciales de Supabase Auth. Django valida el password contra Supabase y luego exige que exista un perfil activo en `public.app_profiles` con `role = 'owner'`.
+
+El contenedor ejecuta automaticamente `python manage.py ensure_backoffice_schema` al iniciar para que Django Admin pueda editar `Permisos por rol`.
 
 ## Nota sobre DATABASE_URL
 

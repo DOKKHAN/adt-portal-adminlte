@@ -71,31 +71,25 @@ class Command(BaseCommand):
         role_permissions = {
             "admin": [
                 "dashboard.view",
-                "training.view",
                 "students.view",
                 "students.manage",
-                "evaluations.view",
-                "evaluations.manage",
+                "evaluations.create",
+                "routines.create",
                 "routines.view",
-                "routines.manage",
-                "metrics.view",
                 "reports.view",
                 "financial_metrics.view",
-                "inventory.view",
             ],
             "coach": [
                 "dashboard.view",
-                "training.view",
                 "students.view",
-                "evaluations.view",
+                "evaluations.create",
+                "routines.create",
                 "routines.view",
             ],
             "viewer": [
                 "dashboard.view",
-                "training.view",
                 "students.view",
-                "metrics.view",
-                "reports.view",
+                "routines.view",
             ],
         }
 
@@ -146,4 +140,3 @@ class Command(BaseCommand):
                     "is_active": profile["is_active"],
                 },
             )
-

@@ -15,4 +15,6 @@ services:
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0,backoffice.adarlotodo.cl}
       DJANGO_CSRF_TRUSTED_ORIGINS: ${DJANGO_CSRF_TRUSTED_ORIGINS:-http://localhost:8090,https://backoffice.adarlotodo.cl}
       ALLOW_SQLITE_FALLBACK: ${ALLOW_SQLITE_FALLBACK:-True}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
       DATABASE_URL: ${DATABASE_URL:-}

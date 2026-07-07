@@ -12,13 +12,6 @@ SIDEBAR_PERMISSIONS = [
         "description": "Ver el inicio del portal.",
     },
     {
-        "key": "training.view",
-        "module": "Entrenamiento",
-        "action": "view",
-        "label": "Entrenamiento",
-        "description": "Ver el grupo Entrenamiento en el sidebar.",
-    },
-    {
         "key": "students.view",
         "module": "Alumnos",
         "action": "view",
@@ -33,17 +26,10 @@ SIDEBAR_PERMISSIONS = [
         "description": "Crear o editar alumnos.",
     },
     {
-        "key": "evaluations.view",
+        "key": "evaluations.create",
         "module": "Evaluaciones",
-        "action": "view",
-        "label": "Evaluaciones: ver",
-        "description": "Ver el modulo de evaluaciones.",
-    },
-    {
-        "key": "evaluations.manage",
-        "module": "Evaluaciones",
-        "action": "manage",
-        "label": "Evaluaciones: editar",
+        "action": "create",
+        "label": "Evaluaciones: crear",
         "description": "Crear o editar evaluaciones.",
     },
     {
@@ -52,20 +38,6 @@ SIDEBAR_PERMISSIONS = [
         "action": "view",
         "label": "Rutinas: ver",
         "description": "Ver el modulo de rutinas.",
-    },
-    {
-        "key": "routines.manage",
-        "module": "Rutinas",
-        "action": "manage",
-        "label": "Rutinas: editar",
-        "description": "Crear o editar rutinas.",
-    },
-    {
-        "key": "metrics.view",
-        "module": "Metricas",
-        "action": "view",
-        "label": "Metricas",
-        "description": "Ver el grupo Metricas en el sidebar.",
     },
     {
         "key": "reports.view",
@@ -80,13 +52,6 @@ SIDEBAR_PERMISSIONS = [
         "action": "view",
         "label": "Metricas financieras",
         "description": "Ver metricas financieras.",
-    },
-    {
-        "key": "inventory.view",
-        "module": "Inventario",
-        "action": "view",
-        "label": "Inventario",
-        "description": "Ver inventario.",
     },
 ]
 
@@ -112,4 +77,3 @@ class Command(BaseCommand):
                 f"Permisos sincronizados: {len(SIDEBAR_PERMISSIONS)}. Rol owner actualizado."
             )
         )
-

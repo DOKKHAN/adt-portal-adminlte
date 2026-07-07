@@ -56,6 +56,8 @@ El comando `bootstrap_local_backoffice --with-sample-users` crea tablas y usuari
 DJANGO_SECRET_KEY=change-me
 DJANGO_DEBUG=True
 DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+SUPABASE_URL=https://supabase.adarlotodo.cl
+SUPABASE_ANON_KEY=anon-key-publica
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/postgres?sslmode=require
 ```
 
@@ -99,11 +101,15 @@ DJANGO_DEBUG=False
 DJANGO_ALLOWED_HOSTS=backoffice.adarlotodo.cl
 DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.adarlotodo.cl
 DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
+SUPABASE_URL=https://supabase.adarlotodo.cl
+SUPABASE_ANON_KEY=anon-key-publica
+ALLOW_SQLITE_FALLBACK=False
 ```
 
 Despues del primer deploy:
 
 ```bash
-python manage.py createsuperuser
 python manage.py sync_sidebar_permissions
 ```
+
+Los perfiles con `role = owner` e `is_active = true` pueden iniciar sesion con sus credenciales de Supabase Auth. El superusuario local de Django queda solo como respaldo operativo.

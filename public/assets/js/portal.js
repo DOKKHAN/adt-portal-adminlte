@@ -8,7 +8,7 @@ const modules = {
   },
   routines: {
     title: "Rutinas",
-    permission: "routines.view",
+    permission: "routines.create",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   },
   students: {
@@ -18,7 +18,7 @@ const modules = {
   },
   evaluations: {
     title: "Evaluaciones",
-    permission: "evaluations.view",
+    permission: "evaluations.create",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   },
   reports: {
@@ -29,11 +29,6 @@ const modules = {
   financial: {
     title: "Métricas financieras",
     permission: "financial_metrics.view",
-    url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
-  },
-  inventory: {
-    title: "Inventario",
-    permission: "inventory.view",
     url: "https://app.mizen.cl/app/mizen/login?branch=master&embed=true"
   }
 };
@@ -49,7 +44,6 @@ const sidebarItems = [
   {
     type: "section",
     label: "Entrenamiento",
-    permission: "training.view",
     items: [
       {
         label: "Alumnos",
@@ -60,13 +54,13 @@ const sidebarItems = [
       {
         label: "Evaluaciones",
         module: "evaluations",
-        permission: "evaluations.view",
+        permission: "evaluations.create",
         icon: "bi-activity"
       },
       {
         label: "Rutinas",
         module: "routines",
-        permission: "routines.view",
+        permission: "routines.create",
         icon: "bi-clipboard-check"
       }
     ]
@@ -74,7 +68,6 @@ const sidebarItems = [
   {
     type: "section",
     label: "Métricas",
-    permission: "metrics.view",
     items: [
       {
         type: "tree",
@@ -87,12 +80,6 @@ const sidebarItems = [
             module: "financial",
             permission: "financial_metrics.view",
             icon: "bi-cash-coin"
-          },
-          {
-            label: "Inventario",
-            module: "inventory",
-            permission: "inventory.view",
-            icon: "bi-box-seam"
           }
         ]
       }

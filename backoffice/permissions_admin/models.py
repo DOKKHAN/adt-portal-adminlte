@@ -3,11 +3,19 @@ import uuid
 from django.db import models
 
 
+ROLE_CHOICES = (
+    ("owner", "Owner"),
+    ("admin", "Admin"),
+    ("coach", "Coach"),
+    ("viewer", "Viewer"),
+)
+
+
 class AppProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     email = models.EmailField()
     full_name = models.CharField(max_length=255, blank=True, null=True)
-    role = models.CharField(max_length=80)
+    role = models.CharField(max_length=80, choices=ROLE_CHOICES)
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -59,7 +67,7 @@ class AppPermission(models.Model):
 
 class AppRolePermission(models.Model):
     id = models.BigAutoField(primary_key=True)
-    role = models.CharField(max_length=80)
+    role = models.CharField(max_length=80, choices=ROLE_CHOICES)
     permission = models.ForeignKey(
         AppPermission,
         db_column="permission_key",
