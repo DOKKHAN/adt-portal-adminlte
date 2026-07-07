@@ -70,14 +70,14 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/postgres?sslmode=require
 URL QA definida:
 
 ```text
-https://backoffice.qa2.adarlotodo.cl
+https://backoffice.adarlotodo.cl
 ```
 
 Desplegar como servicio separado:
 
 ```text
-portal qa2.adarlotodo.cl              -> Nginx estatico actual
-backoffice backoffice.qa2.adarlotodo.cl -> Django privado
+portal qa2.adarlotodo.cl             -> Nginx estatico actual
+backoffice backoffice.adarlotodo.cl  -> Django privado
 ```
 
 En Coolify, crear una aplicacion separada apuntando a este mismo repositorio/rama y usando:
@@ -86,7 +86,7 @@ En Coolify, crear una aplicacion separada apuntando a este mismo repositorio/ram
 Build Pack: Dockerfile
 Base Directory: /backoffice
 Port: 8000
-Domain: https://backoffice.qa2.adarlotodo.cl
+Domain: https://backoffice.adarlotodo.cl
 ```
 
 Variables recomendadas en Coolify:
@@ -94,8 +94,8 @@ Variables recomendadas en Coolify:
 ```env
 DJANGO_SECRET_KEY=valor-largo-y-privado
 DJANGO_DEBUG=False
-DJANGO_ALLOWED_HOSTS=backoffice.qa2.adarlotodo.cl
-DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.qa2.adarlotodo.cl
+DJANGO_ALLOWED_HOSTS=backoffice.adarlotodo.cl
+DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.adarlotodo.cl
 DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
 ```
 

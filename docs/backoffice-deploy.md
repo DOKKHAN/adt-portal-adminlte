@@ -3,7 +3,7 @@
 URL definida para QA:
 
 ```text
-https://backoffice.qa2.adarlotodo.cl
+https://backoffice.adarlotodo.cl
 ```
 
 ## Cloudflare
@@ -11,7 +11,7 @@ https://backoffice.qa2.adarlotodo.cl
 Crear un registro DNS para:
 
 ```text
-backoffice.qa2.adarlotodo.cl
+backoffice.adarlotodo.cl
 ```
 
 Apuntarlo al mismo destino que usa Coolify para `qa2.adarlotodo.cl`.
@@ -33,7 +33,7 @@ Branch: codex/django-backoffice-prototype
 Build Pack: Dockerfile
 Base Directory: /backoffice
 Port: 8000
-Domain: https://backoffice.qa2.adarlotodo.cl
+Domain: https://backoffice.adarlotodo.cl
 ```
 
 Variables:
@@ -41,8 +41,8 @@ Variables:
 ```env
 DJANGO_SECRET_KEY=valor-largo-y-privado
 DJANGO_DEBUG=False
-DJANGO_ALLOWED_HOSTS=backoffice.qa2.adarlotodo.cl
-DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.qa2.adarlotodo.cl
+DJANGO_ALLOWED_HOSTS=backoffice.adarlotodo.cl
+DJANGO_CSRF_TRUSTED_ORIGINS=https://backoffice.adarlotodo.cl
 DATABASE_URL=postgresql://USER:PASSWORD@HOST_INTERNO_SUPABASE:5432/postgres?sslmode=require
 ```
 

@@ -17,7 +17,7 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(
         "DJANGO_ALLOWED_HOSTS",
-        "localhost,127.0.0.1,backoffice.qa2.adarlotodo.cl",
+        "localhost,127.0.0.1,backoffice.adarlotodo.cl",
     ).split(",")
     if host.strip()
 ]
@@ -117,7 +117,7 @@ CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
         "DJANGO_CSRF_TRUSTED_ORIGINS",
-        "https://backoffice.qa2.adarlotodo.cl",
+        "https://backoffice.adarlotodo.cl",
     ).split(",")
     if origin.strip()
 ]
